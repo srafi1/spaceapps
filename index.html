@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple markers</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+		.swal-wide {
+		    width: 850px;
+		}
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src=js/minigame.js></script>
+	<script>
+        $( document ).ready(function() {
+            swal({   title: "Save the World",   text: "Natural Disasters are Everywhere.",   type: "info",   confirmButtonText: "Cool" });
+        });   
+    </script>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var myLatLng = {lat: 37.363, lng: -96.044};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: myLatLng
+        });
+        //start ajax request
+
+        $(function() {
+           $.getJSON('https://redder.scriptrapps.io/save_the_earth/request',function(data) {
+
+               var response = JSON.stringify(data['response']['result']);
+               var response = JSON.parse(response);
+               $(response).each(function (i) {
+                    if(response[i]['type'] == "Point")
+                    {
+                        var point = {lat: response[i]['lat'], lng:response[i]['long']}
+                        var category = response[i]['category'];
+                        var marker = new google.maps.Marker({
+                            position: point,
+                            map: map,
+                            title: response[i]['title'],
+							url: 'http://google.com',
+	                        icon: '/img/alert.png'
+                        });
+	                    var popupText = "<canvas id=minigameCanvas width=512 height=512 onkeydown='getkey(event);' onkeyup='falsekey(event)' tabindex='1'></canvas>";
+                        marker.addListener('click', function() {
+                            console.log(category);
+                            if(category == "Severe Storms") {
+                                swal({   title: "Severe Storm Alert!",   text: popupText, confirmButtonText: "Leave", customClass: 'swal-wide', html: true });
+                            }
+                            if(category == "Volcanoes") {
+                                swal({   title: "Volcano Alert!",   text: popupText, confirmButtonText: "Leave", customClass: 'swal-wide', html: true });
+                            }
+                            if(category == "Wildfires") {
+                                swal({   title: "Wildfire Alert!",   text: popupText, confirmButtonText: "Leave", customClass: 'swal-wide', html: true });
+                            }
+                            if(category == "Floods") {
+                                swal({   title: "Flood Alert!",   text: popupText, confirmButtonText: "Leave", customClass: 'swal-wide', html: true });
+                            }
+                            if(category == "Manmade") {
+                                swal({title: "Humans f*cked up. We need you to stop the damage they caused.",   text: "Don't worry about it. Someone will clean it up, right?", confirmButtonText: "Leave", customClass: 'swal-wide', html: true});    
+                            }
+	                        swal.disableButtons();
+	                        initGame(response[i]['lat'], response[i]['long'], response[i]['category']);
+                            //map.setCenter(marker.getPosition());
+                        });
+
+                    }
+               })
+               console.log(response);
+           })
+        });
+
+
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARWU22abTFJ3D3D_qLJY2tnw8Adj2tw2U&callback=initMap">
+</script>
+</body>
+</html>
