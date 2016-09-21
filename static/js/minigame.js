@@ -40,9 +40,9 @@ function initGame(nlat, nlng, ncategory) {
 	console.log("Wildfires " + category);
 	if (category == "Wildfires") {
 		ob1.img = new Image;
-		ob1.img.src = '/img/fire.png';
+		ob1.img.src = 'https://rawgithub.com/srafi2/spaceapps/master/img/fire.png';
 		ob2.img = new Image;
-		ob2.img.src = '/img/fire.png';
+		ob2.img.src = 'https://rawgithub.com/srafi2/spaceapps/master/img/fire.png';
 	}
 
 	loop = setInterval(update, 17);

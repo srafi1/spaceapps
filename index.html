@@ -4,8 +4,8 @@
     <title>Simple markers</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="https://rawgithub.com/srafi2/spaceapps/css/sweetalert.css">
-	<link rel="stylesheet" type="text/css" href="https://rawgithub.com/srafi2/spaceapps/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://rawgithub.com/srafi2/spaceapps/master/css/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="https://rawgithub.com/srafi2/spaceapps/master/css/style.css">
     <style>
         html, body {
             height: 100%;
@@ -19,9 +19,9 @@
 		    width: 850px;
 		}
     </style>
-    <script src="https://rawgithub.com/srafi2/spaceapps/js/jquery.min.js"></script>
-    <script src="https://rawgithub.com/srafi2/spaceapps/js/sweetalert.min.js"></script>
-    <script src=https://rawgithub.com/srafi2/spaceapps/js/minigame.js></script>
+    <script src="https://rawgithub.com/srafi2/spaceapps/master/js/jquery.min.js"></script>
+    <script src="https://rawgithub.com/srafi2/spaceapps/master/js/sweetalert.min.js"></script>
+    <script src=https://rawgithub.com/srafi2/spaceapps/master/js/minigame.js></script>
 	<script>
         $( document ).ready(function() {
             swal({   title: "Save the World",   text: "Natural Disasters are Everywhere.",   type: "info",   confirmButtonText: "Cool" });
@@ -55,7 +55,7 @@
                             map: map,
                             title: response[i]['title'],
 							url: 'http://google.com',
-	                        icon: 'https://rawgithub.com/srafi2/spaceapps//img/alert.png'
+	                        icon: 'https://rawgithub.com/srafi2/spaceapps/master/img/alert.png'
                         });
 	                    var popupText = "<canvas id=minigameCanvas width=512 height=512 onkeydown='getkey(event);' onkeyup='falsekey(event)' tabindex='1'></canvas>";
                         marker.addListener('click', function() {
